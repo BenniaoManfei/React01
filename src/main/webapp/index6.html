@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="resources/css/base.css">
+        <script src="resources/js/react.js"></script>
+    	<script src="resources/js/react-dom.js"></script>
+    	<script src="resources/js/browser.min.js"></script>
+        <script src="resources/js/jquery.min.js"></script>
+        <script src="resources/js/remarkable.min.js"></script>
+    <head>
+    <body>
+        <div id="Component"></div>
+    <body>
+    <script type="text/babel">
+        var CommentBox = React.createClass({
+            render : function() {
+                return (
+                    <div className="commentBox">
+                        <h1>Comments</h1>
+                        <CommentList />
+                        <CommentForm />
+                    </div>
+                );
+            }
+        });
+        var CommentList = React.createClass({
+            render:function(){
+                return (
+                    <div className="commentList">
+                        <Comment author="Pete Hunt">This is one comment</Comment>
+                        <Comment author="Jordan Walke">This is *another* comment</Comment>
+                    </div>
+                );
+            }
+        });
+        var CommentForm = React.createClass({
+            render : function() {
+                return (
+                    <div className="commentForm" >
+                        Hello,world!I am a CommentForm.
+                    </div>
+                );
+            }
+        });
+        var Comment = React.createClass({
+            rawMarkup:function(){
+                    var md = new Remarkable();
+                    var rawMarkup = md.render(this.props.children.toString());
+                    return { __html:rawMarkup};
+            },
+            render : function(){
+                var md = new Remarkable();
+                return (
+                    <div className="comment">
+                        <h2 className="commnetAuthor">
+                            {this.props.author}
+                        </h2>
+                        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <CommentBox />,
+            document.getElementById("Component"),
+            function(){
+                console.info("数据加载完成");
+            }
+        )
+    </script>
+</html>
