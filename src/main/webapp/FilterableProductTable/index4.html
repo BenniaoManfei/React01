@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../resources/bootstrap3/css/bootstrap.min.css">
+<script src="../resources/js/jquery.min.js"></script>
+<script src="../resources/js/react.js"></script>
+<script src="../resources/js/react-dom.js"></script>
+<script src="../resources/js/browser.min.js"></script>
+<script src="../resources/js/react-with-addons.min.js"></script>
+<script src="../resources/bootstrap3/js/bootstrap.min.js"></script>
+</head>
+<body class="container" style="padding:20px;">
+	<div id="media" class="container"></div>
+
+</body>
+<script type="text/babel">
+	var Avatar = React.createClass({
+
+		render:function(){
+			return (
+				<div>
+					<ProfilePic username={this.props.username} />
+					<ProfileLink username={this.props.username} />
+				</div>
+			)
+		}
+	});
+	var ProfilePic = React.createClass({
+		render:function(){
+			return (
+				<img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
+			)
+		}
+	});
+	var ProfileLink = React.createClass({
+		render:function(){
+			return (
+				<a href={'http://www.facebook.com/'+this.props.username}>
+					{this.props.username}
+				</a>
+			)
+		}
+	});
+
+    ReactDOM.render(
+        <Avatar username="pwh" />,
+        document.getElementById("media"),
+        function(){
+            console.info("数据加载完成");
+        }
+    )
+</script>
+</html>
